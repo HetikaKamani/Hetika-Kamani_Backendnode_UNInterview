@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Friends Nickname Generator</title>
+</head>
+<body>
+  <h2>Friends Nickname Generator</h2>
+  <!-- we are calling the function when the button gets clicked -->
+  <button onclick="generateFriendsNickname()">Generate Nickname</button> 
+  <script>
+    //here the function is created
+    function generateFriendsNickname() {
+      const surnames = ["Geller", "Tribbiani", "Buffay", "Green", "Bing", "Wheeler", "Hannigan"];
+    //taking input of the name
+      const firstName = prompt("Enter your first name:");
+
+      //to make sure that the input is not empty and also is only letters
+      const isValid = /^[A-Za-z]+$/.test(firstName);
+
+      if (!isValid) {
+        alert("Please enter a valid name (letters only).");
+        return;
+      }
+      //seperating the first four letters from the name and in case the name is less than 4 letters then taking the entire name
+      const namePart = firstName.slice(0, 4);
+      //math.random is a function in which it generates any number between 0 and 1 where 0 is included..
+      // and later multplied by 7 because there are 7 surnames..
+      //math.floor rounds the number to the smaller whole number so now between 0 and 6
+      const randomSurname = surnames[Math.floor(Math.random() * surnames.length)];
+      //$ is used to concatenate the strings
+      const nickname = `${namePart} ${randomSurname}`;
+      //alert is for the pop up box
+      alert(`Your Friends nickname is: ${nickname}`);
+      console.log(`Your Friends nickname is: ${nickname}`);
+    }
+  </script>
+</body>
+</html>
