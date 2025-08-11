@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Top Friends Episodes</title>
+</head>
+<body>
+  <h2>Top N Friends Episodes</h2>
+  <button onclick="getTopNEpisodes()">Get Top Episodes</button>
+
+  <script>
+const episodes = [
+  { name: "The One with Ross's Tan", season: 10, ep_no: 3, avg_rating: 8.5 },
+  { name: "The One with the Prom Video", season: 2, ep_no: 14, avg_rating: 9.6 },
+  { name: "The Last One, Part 2", season: 10, ep_no: 18, avg_rating: 9.6 },
+  { name: "The One Where Everybody Finds Out", season: 5, ep_no: 14, avg_rating: 9.5 }
+];
+
+// function to find top episodes based on user’s choice..
+function getTopNEpisodes() {
+  // input the number from user
+  const userInput = prompt(`Enter number of top episodes (1 to ${episodes.length}):`);
+  // coverting from string to number
+  const N = parseInt(userInput);
+
+  // Check if the input is a valid number within the allowed range
+  if (isNaN(N) || N <= 0 || N > episodes.length) {
+    alert("Please enter a valid number between 1 and " + episodes.length);
+    return; 
+  }
+  const sorted = episodes.sort((a, b) => {
+    // sort by rating, highest first
+    if (b.avg_rating !== a.avg_rating) return b.avg_rating - a.avg_rating;
+    // if ratings are the same, earlier seasons come first
+    if (a.season !== b.season) return a.season - b.season;
+    // if same season, lower episode numbers come first
+    return a.ep_no - b.ep_no;
+  });
+const topEpisodes = sorted.slice(0, N);
+  let result = ` Top ${N} Episodes:\n\n`;
+
+  topEpisodes.forEach(ep => {
+    result += `${ep.name} (S${ep.season}E${ep.ep_no}) - ${ep.avg_rating}\n`;
+  });
+alert(result);
+  console.log(result);
+}
+</script>
+</body>
+</html>
